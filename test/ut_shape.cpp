@@ -1,9 +1,10 @@
 #include <iostream>
 #include "gtest/gtest.h"
 
-#include "circle.h"
-#include "rectangle.h"
-#include "triangle.h"
+#include "../src/shape.h"
+#include "../src/circle.h"
+#include "../src/rectangle.h"
+#include "../src/triangle.h"
 
 using namespace std;
 
@@ -38,4 +39,15 @@ TEST(ShapeTest, Triangle)
     ASSERT_NEAR(19.0, triangle.area(), 0.1);
     ASSERT_NEAR(27.0, triangle.perimeter(), 0.1);
     ASSERT_TRUE(triangle.isTriangle());
+}
+
+TEST(ShapeTest, isTriangle)
+{
+    Triangle triangle(1.0, 0.0, 2.0, 0.0, 3.0, 0.0);
+    ASSERT_ANY_THROW(triangle.isTriangle());    
+}
+
+TEST(ShapeTest, Sorting)
+{
+    Shape* shapeList[4] = {new Circle(5.0), new Rectangle(4.0, 5.0), new Triangle(3.0, 0.0, 0.0, 0.0, 0.0, 4.0)};
 }

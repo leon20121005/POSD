@@ -1,4 +1,4 @@
-class Rectangle
+class Rectangle: public Shape
 {
     public:
         Rectangle(double length, double width):_length(length),_width(width)

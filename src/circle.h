@@ -1,6 +1,6 @@
 #include <math.h>
 
-class Circle
+class Circle: public Shape
 {
     public:
         Circle(double radius):_radius(radius)
