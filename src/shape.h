@@ -10,18 +10,11 @@ class Shape
 
         double compactness() const
         {
-            try
+            if (this->area() == 0)
             {
-                if (this->area() == 0)
-                {
-                    throw "Division by zero";
-                }
-                return this->perimeter() * this->perimeter() / this->area();
+                throw std::string("Division by zero");
             }
-            catch (const char* string)
-            {
-                std::cout << string << std::endl;
-            }
+            return this->perimeter() * this->perimeter() / this->area();
         }
 };
 
