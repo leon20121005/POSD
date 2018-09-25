@@ -43,7 +43,7 @@ TEST(ShapeTest, Triangle)
 TEST(ShapeTest, isTriangle)
 {
     Triangle triangle(1.0, 0.0, 2.0, 0.0, 3.0, 0.0);
-    ASSERT_ANY_THROW(triangle.isTriangle());    
+    ASSERT_ANY_THROW(triangle.isTriangle());
 }
 
 TEST(ShapeTest, Sorting)
