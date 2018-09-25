@@ -1,3 +1,6 @@
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
+
 #include <math.h>
 #include "shape.h"
 
@@ -67,3 +70,5 @@ class Triangle: public Shape
         double _x3;
         double _y3;
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
 #include "shape.h"
 
 class Rectangle: public Shape
@@ -20,3 +23,5 @@ class Rectangle: public Shape
         double _length;
         double _width;
 };
+
+#endif
