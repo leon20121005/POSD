@@ -1,41 +1,71 @@
+#include <algorithm>
+
+using namespace std;
+
 class Sort
 {
     public:
-        Sort(std::vector<Shape*>* v):_v(v)
+        Sort(vector<Shape*>* shapeList):_shapeList(shapeList)
         {
         }
 
         // The argument ** Accept comparison ** can accept lambda, function, and object
-        void sortArea(** Accept comparison **)
+        template<typename Compare>
+        void sortArea(Compare compare)
         {
+            sort(_shapeList->begin(), _shapeList->end(), compare);
         }
 
-        void sortPerimeter(** Accept comparison **)
+        template<typename Compare>
+        void sortPerimeter(Compare compare)
         {
-
+            for (vector<Shape*>::iterator i = _shapeList->begin() + 1; i != _shapeList->end(); ++i)
+            {
+                for (vector<Shape*>::iterator j = i; j != _shapeList->begin(); --j)
+                {
+                    if (compare(*(j - 1), *j))
+                    {
+                        iter_swap(j - 1, j);
+                    }
+                }
+            }
         }
 
-        void sortCompactness(** Accept comparison **)
+        template<class Compare>
+        void sortCompactness(Compare compare)
         {
-
+            sort(_shapeList->begin(), _shapeList->end(), compare);
         }
-
     private:
-        std::vector<Shape*>* _v;
+        vector<Shape*>* _shapeList;
 };
 
-// You should implement area ascending and descending lamda function as parameter for Sort::sortArea()
+// You should implement area ascending and descending lambda function as parameter for Sort::sortArea()
 
 // You should use those functions as parameter for Sort::sortPerimeter()
-bool perimeterDescendingComparison(Shape *a, Shape *b);
+bool perimeterDescendingComparison(Shape *a, Shape *b)
+{
+    return a->perimeter() > b->perimeter();
+}
 
-bool perimeterAscendingComparison(Shape *a, Shape *b);
+bool perimeterAscendingComparison(Shape *a, Shape *b)
+{
+    return a->perimeter() < b->perimeter();
+}
 
 // You should use those objects as parameter for Sort::sortCompactness()
-class CompactnessAscendingComparison
+struct CompactnessAscendingComparison
 {
+    bool operator() (Shape* a, Shape* b)
+    {
+        return a->compactness() < b->compactness();
+    }
 };
 
-class CompactnessDescendingComparison
+struct CompactnessDescendingComparison
 {
+    bool operator() (Shape* a, Shape* b)
+    {
+        return a->compactness() > b->compactness();
+    }
 };
