@@ -40,10 +40,17 @@ TEST(ShapeTest, Triangle)
     ASSERT_TRUE(triangle.isTriangle());
 }
 
-TEST(ShapeTest, isTriangle)
+TEST(ShapeTest, isNotTriangle)
 {
-    Triangle triangle(1.0, 0.0, 2.0, 0.0, 3.0, 0.0);
-    ASSERT_ANY_THROW(triangle.isTriangle());
+    try
+    {
+        Triangle triangle(1.0, 0.0, 2.0, 0.0, 3.0, 0.0);
+        ASSERT_TRUE(false);
+    }
+    catch (string exception)
+    {
+        ASSERT_EQ(std::string("Not a triangle."), exception);
+    }
 }
 
 TEST(ShapeTest, Sorting)

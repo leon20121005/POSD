@@ -9,16 +9,9 @@ class Triangle: public Shape
     public:
         Triangle(double x1, double y1, double x2, double y2, double x3, double y3):_x1(x1),_y1(y1),_x2(x2),_y2(y2),_x3(x3),_y3(y3)
         {
-            try
+            if (!(this->isTriangle()))
             {
-                if (!(this->isTriangle()))
-                {
-                    throw "Not a triangle";
-                }
-            }
-            catch (const char* string)
-            {
-                std::cout << string << std::endl;
+                throw std::string("Not a triangle.");
             }
         }
 
