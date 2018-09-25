@@ -23,7 +23,7 @@ class Sort
             {
                 for (vector<Shape*>::iterator j = i; j != _shapeList->begin(); --j)
                 {
-                    if (compare(*(j - 1), *j))
+                    if (!compare(*(j - 1), *j))
                     {
                         iter_swap(j - 1, j);
                     }
