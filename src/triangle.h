@@ -1,4 +1,5 @@
 #include <math.h>
+#include "shape.h"
 
 class Triangle: public Shape
 {

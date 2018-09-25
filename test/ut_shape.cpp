@@ -1,7 +1,6 @@
 #include <iostream>
 #include "gtest/gtest.h"
 
-#include "../src/shape.h"
 #include "../src/circle.h"
 #include "../src/rectangle.h"
 #include "../src/triangle.h"
