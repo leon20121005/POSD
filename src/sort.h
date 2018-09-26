@@ -54,18 +54,20 @@ bool perimeterAscendingComparison(Shape *a, Shape *b)
 }
 
 // You should use those objects as parameter for Sort::sortCompactness()
-struct CompactnessAscendingComparison
+class CompactnessDescendingComparison
 {
-    bool operator() (Shape* a, Shape* b)
-    {
-        return a->compactness() < b->compactness();
-    }
+    public:
+        bool operator() (Shape* a, Shape* b)
+        {
+            return a->compactness() > b->compactness();
+        }
 };
 
-struct CompactnessDescendingComparison
+class CompactnessAscendingComparison
 {
-    bool operator() (Shape* a, Shape* b)
-    {
-        return a->compactness() > b->compactness();
-    }
+    public:
+        bool operator() (Shape* a, Shape* b)
+        {
+            return a->compactness() < b->compactness();
+        }
 };
