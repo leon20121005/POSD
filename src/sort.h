@@ -1,3 +1,6 @@
+#ifndef SORT_H
+#define SORT_H
+
 #include <algorithm>
 
 using namespace std;
@@ -71,3 +74,5 @@ class CompactnessAscendingComparison
             return a->compactness() < b->compactness();
         }
 };
+
+#endif
