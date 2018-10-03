@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     vector<string>* lines = ReadFile(argv[1]);
     vector<Shape*>* shapes = new vector<Shape*>();
 
-    for (int index = 0; index < lines->size() - 1; index++)
+    for (int index = 0; index < lines->size(); index++)
     {
         Shape* shape = ParseShapeString((*lines)[index]);
         shapes->push_back(shape);
@@ -55,7 +55,10 @@ vector<string>* ReadFile(char* fileName)
     while (!file.eof())
     {
         getline(file, line);
-        lines->push_back(line);
+        if (line != "")
+        {
+            lines->push_back(line);
+        }
     }
     file.close();
     return lines;
