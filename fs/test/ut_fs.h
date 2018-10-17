@@ -59,3 +59,11 @@ TEST(FileSystemTest, FindNotSelf)
     File* hello_cpp = new File("./test_data/hello.cpp");
     ASSERT_EQ("", hello_cpp->find("hello.out"));
 }
+
+TEST(FileSystemTest, FindFolderInFolder)
+{
+    Folder* test_data = new Folder("./test_data");
+    Folder* folder = new Folder("./test_data/folder");
+    test_data->add(folder);
+    ASSERT_EQ("./folder", test_data->find("folder"));
+}

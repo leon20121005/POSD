@@ -30,6 +30,10 @@ class Folder: public Node
             }
 
             string result;
+            if ((*splitResult)[splitResult->size() - 1] == this->name())
+            {
+                return nodeName;
+            }
             for (int index = 0; index < _children.size(); index++)
             {
                 if (result != "")
