@@ -24,7 +24,10 @@ class Node
             return _nodeName;
         }
 
-        virtual void add(Node* node) = 0;
+        virtual void add(Node* node)
+        {
+            throw string("unable to add");
+        }
 
         virtual string find(string nodeName) = 0;
     private:
