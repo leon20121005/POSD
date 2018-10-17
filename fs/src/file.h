@@ -14,5 +14,9 @@ class File: public Node
             {
                 return nodeName;
             }
+            else
+            {
+                return "";
+            }
         }
 };

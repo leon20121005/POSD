@@ -15,7 +15,7 @@ TEST(FileSystemTest, Name)
 TEST(FileSystemTest, FindSelf)
 {
     File* hello_cpp = new File("./test_data/hello.cpp");
-    ASSERT_EQ("hello.cpp",hello_cpp->find("hello.cpp"));
+    ASSERT_EQ("hello.cpp", hello_cpp->find("hello.cpp"));
 }
 
 TEST(FileSystemTest, FindOneLayerPath)
@@ -52,4 +52,10 @@ TEST(FileSystemTest, FindNoPath)
 {
     Folder* test_data = new Folder("./test_data");
     ASSERT_EQ("", test_data->find("hello.cpp"));
+}
+
+TEST(FileSystemTest, FindNotSelf)
+{
+    File* hello_cpp = new File("./test_data/hello.cpp");
+    ASSERT_EQ("", hello_cpp->find("hello.out"));
 }
