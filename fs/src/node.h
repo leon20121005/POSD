@@ -24,6 +24,8 @@ class Node
             return _nodeName;
         }
 
+        virtual void add(Node* node) = 0;
+
         virtual string find(string nodeName) = 0;
     private:
         const char* _path;
