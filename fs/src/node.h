@@ -14,7 +14,7 @@ class Node
     public:
         Node(const char* path):_path(path)
         {
-            stat(_path, &_st);
+            lstat(_path, &_st);
             vector<string>* splitResult = split(_path, "/");
             _nodeName = (*splitResult)[splitResult->size() - 1];
         }
