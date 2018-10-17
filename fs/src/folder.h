@@ -30,19 +30,20 @@ class Folder: public Node
             }
 
             string result;
-            if ((*splitResult)[splitResult->size() - 1] == this->name())
+            if (splitResult->size() > 1 && (*splitResult)[splitResult->size() - 1] == this->name())
             {
-                return nodeName;
+                result += nodeName;
             }
             for (int index = 0; index < _children.size(); index++)
             {
-                if (result != "")
+                string next = _children[index]->find(newNodeName);
+                if (result != "" && next != "")
                 {
-                    result += "\n" + _children[index]->find(newNodeName);
+                    result += "\n" + next;
                 }
                 else
                 {
-                    result += _children[index]->find(newNodeName);
+                    result += next;
                 }
             }
             return result;
