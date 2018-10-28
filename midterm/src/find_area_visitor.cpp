@@ -1,8 +1,6 @@
 #include "find_area_visitor.h"
 #include "shape.h"
 
-#include <iostream>
-
 FindAreaVisitor::FindAreaVisitor(double min, double max):_min(min),_max(max)
 {
     _result = std::vector<Shape*>();

@@ -7,7 +7,7 @@ OBJ = obj
 LIBS = -lgtest -lpthread
 
 all: clean dict ${OBJ}/shape.o ${OBJ}/complex_shapes.o ${OBJ}/find_area_visitor.o ${BIN}/midterm
- 
+
 ${BIN}/midterm: ${OBJ}/ut_midterm.o
 	g++ -std=c++11 ${OBJ}/shape.o ${OBJ}/complex_shapes.o ${OBJ}/find_area_visitor.o -o $@ $< -lgtest -pthread
 

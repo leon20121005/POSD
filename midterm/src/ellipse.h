@@ -17,7 +17,7 @@ class Ellipse: public Shape
 
         double perimeter() const
         {
-            return 2 * M_PI * sqrt((_a * _a + _b * _b) / 2);
+            return 2 * M_PI * sqrt((pow(_a, 2) + pow(_b, 2)) / 2);
         }
     private:
         double _a;

@@ -7,9 +7,8 @@
 class ComplexShapes: public Shape
 {
     public:
-        ComplexShapes(std::vector<Shape*>* shapes)
+        ComplexShapes(std::vector<Shape*>* shapes):_shapes(shapes)
         {
-            _shapes = shapes;
         }
 
         void add(Shape* shape);
