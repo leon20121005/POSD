@@ -1,7 +1,11 @@
 .PHONY: clean
 
-bin/hw4: test/ut_fs.h test/ut_fs.cpp src/file.h src/folder.h src/node.h
-	g++ test/ut_fs.cpp -o bin/hw4 -lgtest -lpthread
+bin/hw5: test/ut_fs.cpp test/ut_fs.h src/file.h src/folder.h src/node.h
+ifeq ($(OS), Windows_NT)
+	g++ $< -o $@ -lgtest
+else
+	g++ $< -o $@ -lgtest -lpthread
+endif
 
 clean:
-	rm bin/hw4
+	rm -f bin/*

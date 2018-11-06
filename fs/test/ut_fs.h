@@ -51,7 +51,7 @@ TEST(FileSystemTest, FindMultiPath)
     test_data->add(hello_cpp);
     test_data->add(folder);
     folder->add(hello_cpp2);
-    ASSERT_EQ("./hello.cpp\n./folder/hello.cpp", test_data->find("hello.cpp"));
+    ASSERT_EQ("./folder/hello.cpp\n./hello.cpp", test_data->find("hello.cpp"));
 }
 
 TEST(FileSystemTest, FindNoPath)

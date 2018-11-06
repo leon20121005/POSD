@@ -9,7 +9,7 @@ class Folder: public Node
 
         void add(Node* node)
         {
-            _children.push_back(node);
+            _children.insert(pair<string, Node*>(node->name(), node));
         }
 
         string find(string nodeName)
@@ -34,9 +34,9 @@ class Folder: public Node
             {
                 result += nodeName;
             }
-            for (int index = 0; index < _children.size(); index++)
+            for (map<string, Node*>::iterator iter = _children.begin(); iter != _children.end(); iter++)
             {
-                string next = _children[index]->find(newNodeName);
+                string next = iter->second->find(newNodeName);
                 if (result != "" && next != "")
                 {
                     result += "\n" + next;
@@ -49,5 +49,5 @@ class Folder: public Node
             return result;
         }
     private:
-        vector<Node*> _children;
+        map<string, Node*> _children;
 };
