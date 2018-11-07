@@ -48,6 +48,11 @@ class Folder: public Node
             }
             return result;
         }
+
+        void accept(NodeVisitor* nodeVisitor)
+        {
+            nodeVisitor->visitFolder(this);
+        }
     private:
         map<string, Node*> _children;
 };

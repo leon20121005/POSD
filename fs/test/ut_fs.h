@@ -3,6 +3,7 @@
 
 #include "../src/file.h"
 #include "../src/folder.h"
+#include "../src/find_visitor.h"
 
 using namespace std;
 
@@ -15,7 +16,9 @@ TEST(FileSystemTest, Name)
 TEST(FileSystemTest, FindFileSelf)
 {
     File* hello_cpp = new File("./test_data/hello.cpp");
-    ASSERT_EQ("hello.cpp", hello_cpp->find("hello.cpp"));
+    FindVisitor* findVisitor = new FindVisitor("hello.cpp");
+    hello_cpp->accept(findVisitor);
+    ASSERT_EQ("hello.cpp", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindFolderSelf)
@@ -51,7 +54,9 @@ TEST(FileSystemTest, FindMultiPath)
     test_data->add(hello_cpp);
     test_data->add(folder);
     folder->add(hello_cpp2);
-    ASSERT_EQ("./folder/hello.cpp\n./hello.cpp", test_data->find("hello.cpp"));
+    FindVisitor* findVisitor = new FindVisitor("hello.cpp");
+    test_data->accept(findVisitor);
+    ASSERT_EQ("./folder/hello.cpp\n./hello.cpp", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindNoPath)

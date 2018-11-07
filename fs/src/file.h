@@ -19,4 +19,9 @@ class File: public Node
                 return "";
             }
         }
+
+        void accept(NodeVisitor* nodeVisitor)
+        {
+            nodeVisitor->visitFile(this);
+        }
 };

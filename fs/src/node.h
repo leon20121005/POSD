@@ -5,10 +5,9 @@
 #include <string>
 #include <sys/stat.h>
 #include <map>
+#include "node_visitor.h"
 
 using namespace std;
-
-vector<string>* split(string s, string delimiter);
 
 class Node
 {
@@ -31,26 +30,27 @@ class Node
         }
 
         virtual string find(string nodeName) = 0;
+        virtual void accept(NodeVisitor* nodeVisitor) = 0;
+
+        static vector<string>* split(string s, string delimiter)
+        {
+            vector<string>* result = new vector<string>();
+            for (int index = 0; index < s.size();)
+            {
+                result->push_back(s.substr(index, s.find(delimiter, index) - index));
+
+                if (s.find(delimiter, index) == string::npos)
+                {
+                    break;
+                }
+                index = index + (s.find(delimiter, index) - index + delimiter.size());
+            }
+            return result;
+        }
     private:
         const char* _path;
         struct stat _st;
         string _nodeName;
 };
-
-vector<string>* split(string s, string delimiter)
-{
-    vector<string>* result = new vector<string>();
-    for (int index = 0; index < s.size();)
-    {
-        result->push_back(s.substr(index, s.find(delimiter, index) - index));
-
-        if (s.find(delimiter, index) == string::npos)
-        {
-            break;
-        }
-        index = index + (s.find(delimiter, index) - index + delimiter.size());
-    }
-    return result;
-}
 
 #endif
