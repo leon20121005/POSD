@@ -6,7 +6,7 @@ bin/hw5: test/ut_fs.cpp test/ut_fs.h src/file.h src/folder.h src/node.h src/node
 ifeq ($(OS), Windows_NT)
 	g++ obj/find_visitor.o $< -o $@ -lgtest
 else
-	g++ obj/find_visitor.o $< -o $@ -lgtest -lpthread
+	g++ -std=c++11 obj/find_visitor.o $< -o $@ -lgtest -lpthread
 endif
 
 obj/find_visitor.o: src/find_visitor.cpp src/find_visitor.h
