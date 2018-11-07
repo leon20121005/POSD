@@ -7,19 +7,6 @@ class File: public Node
         {
         }
 
-        string find(string nodeName)
-        {
-            vector<string>* splitResult = split(nodeName, "/");
-            if ((*splitResult)[splitResult->size() - 1] == this->name())
-            {
-                return nodeName;
-            }
-            else
-            {
-                return "";
-            }
-        }
-
         void accept(NodeVisitor* nodeVisitor)
         {
             nodeVisitor->visitFile(this);

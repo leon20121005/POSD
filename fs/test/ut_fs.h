@@ -24,7 +24,9 @@ TEST(FileSystemTest, FindFileSelf)
 TEST(FileSystemTest, FindFolderSelf)
 {
     Folder* test_data = new Folder("./test_data");
-    ASSERT_EQ("", test_data->find("test_data"));
+    FindVisitor* findVisitor = new FindVisitor("test_data");
+    test_data->accept(findVisitor);
+    ASSERT_EQ("", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindOneLayerPath)
@@ -32,7 +34,9 @@ TEST(FileSystemTest, FindOneLayerPath)
     Folder* test_data = new Folder("./test_data");
     File* hello_cpp = new File("./test_data/hello.cpp");
     test_data->add(hello_cpp);
-    ASSERT_EQ("./hello.cpp", test_data->find("hello.cpp"));
+    FindVisitor* findVisitor = new FindVisitor("hello.cpp");
+    test_data->accept(findVisitor);
+    ASSERT_EQ("./hello.cpp", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindTwoLayersPath)
@@ -42,7 +46,9 @@ TEST(FileSystemTest, FindTwoLayersPath)
     File* hello_cpp = new File("./test_data/folder/hello.cpp");
     test_data->add(folder);
     folder->add(hello_cpp);
-    ASSERT_EQ("./folder/hello.cpp", test_data->find("hello.cpp"));
+    FindVisitor* findVisitor = new FindVisitor("hello.cpp");
+    test_data->accept(findVisitor);
+    ASSERT_EQ("./folder/hello.cpp", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindMultiPath)
@@ -62,13 +68,17 @@ TEST(FileSystemTest, FindMultiPath)
 TEST(FileSystemTest, FindNoPath)
 {
     Folder* test_data = new Folder("./test_data");
-    ASSERT_EQ("", test_data->find("hello.cpp"));
+    FindVisitor* findVisitor = new FindVisitor("hello.cpp");
+    test_data->accept(findVisitor);
+    ASSERT_EQ("", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindNotSelf)
 {
     File* hello_cpp = new File("./test_data/hello.cpp");
-    ASSERT_EQ("", hello_cpp->find("hello.out"));
+    FindVisitor* findVisitor = new FindVisitor("hello.out");
+    hello_cpp->accept(findVisitor);
+    ASSERT_EQ("", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindFolderInFolder)
@@ -76,7 +86,9 @@ TEST(FileSystemTest, FindFolderInFolder)
     Folder* test_data = new Folder("./test_data");
     Folder* folder = new Folder("./test_data/folder");
     test_data->add(folder);
-    ASSERT_EQ("./folder", test_data->find("folder"));
+    FindVisitor* findVisitor = new FindVisitor("folder");
+    test_data->accept(findVisitor);
+    ASSERT_EQ("./folder", findVisitor->findResult());
 }
 
 TEST(FileSystemTest, FindFileInComplicatedPath)
@@ -88,6 +100,10 @@ TEST(FileSystemTest, FindFileInComplicatedPath)
     test_data->add(folder);
     test_data->add(hello_out);
     folder->add(hello_cpp);
-    ASSERT_EQ("./folder/hello.cpp", test_data->find("hello.cpp"));
-    ASSERT_EQ("./hello.cpp", folder->find("hello.cpp"));
+    FindVisitor* findVisitor = new FindVisitor("hello.cpp");
+    test_data->accept(findVisitor);
+    FindVisitor* findVisitor2 = new FindVisitor("hello.cpp");
+    folder->accept(findVisitor2);
+    ASSERT_EQ("./folder/hello.cpp", findVisitor->findResult());
+    ASSERT_EQ("./hello.cpp", findVisitor2->findResult());
 }
