@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include "node_visitor.h"
+#include "node_iterator.h"
 
 class Node
 {
@@ -32,7 +33,13 @@ class Node
             throw std::string("unable to add");
         }
 
+        virtual int numberOfChildren()
+        {
+            throw std::string("number of children: not applicable");
+        }
+
         virtual void accept(NodeVisitor* nodeVisitor) = 0;
+        virtual NodeIterator* createIterator() = 0;
 
         static std::vector<std::string>* split(std::string s, std::string delimiter)
         {

@@ -1,5 +1,4 @@
 #include "node.h"
-#include "node_iterator.h"
 
 class Folder: public Node
 {
@@ -52,7 +51,7 @@ class Folder: public Node
             _children.insert(std::pair<std::string, Node*>(node->name(), node));
         }
 
-        int getChildrenSize()
+        int numberOfChildren()
         {
             return _children.size();
         }

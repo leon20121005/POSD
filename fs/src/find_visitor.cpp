@@ -32,7 +32,7 @@ void FindVisitor::visitFolder(Folder* folder)
         _traversal += "/" + folder->name();
     }
 
-    if (folder->getChildrenSize() > 1)
+    if (folder->numberOfChildren() > 1)
     {
         _traversal += "/<branch>";
     }
