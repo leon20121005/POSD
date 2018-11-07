@@ -4,8 +4,6 @@
 class Folder: public Node
 {
     public:
-        friend class FindVisitor;
-
         class FolderIterator: public NodeIterator
         {
             public:
@@ -52,6 +50,11 @@ class Folder: public Node
         void add(Node* node)
         {
             _children.insert(std::pair<std::string, Node*>(node->name(), node));
+        }
+
+        int getChildrenSize()
+        {
+            return _children.size();
         }
 
         void accept(NodeVisitor* nodeVisitor)
