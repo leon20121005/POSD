@@ -1,15 +1,22 @@
 .PHONY: clean
 
-all: clean dict obj/find_visitor.o bin/hw5
+all: clean dict obj/find_visitor.o obj/info_content_visitor.o bin/hw5
 
-bin/hw5: test/ut_fs.cpp test/ut_fs.h src/file.h src/folder.h src/node.h src/node_visitor.h obj/find_visitor.o src/node_iterator.h src/null_iterator.h
+bin/hw5: test/ut_fs.cpp test/ut_fs.h src/file.h src/folder.h src/node.h src/node_visitor.h obj/find_visitor.o src/node_iterator.h src/null_iterator.h obj/info_content_visitor.o
 ifeq ($(OS), Windows_NT)
 	g++ obj/find_visitor.o $< -o $@ -lgtest
 else
-	g++ -std=c++11 obj/find_visitor.o $< -o $@ -lgtest -lpthread
+	g++ -std=c++11 obj/find_visitor.o info_content_visitor.o $< -o $@ -lgtest -lpthread
 endif
 
 obj/find_visitor.o: src/find_visitor.cpp src/find_visitor.h
+ifeq ($(OS), Windows_NT)
+	g++ -c $< -o $@ -lgtest
+else
+	g++ -std=c++11 -c $< -o $@ -lgtest -lpthread
+endif
+
+obj/info_content_visitor.o: src/info_content_visitor.cpp src/info_content_visitor.h
 ifeq ($(OS), Windows_NT)
 	g++ -c $< -o $@ -lgtest
 else

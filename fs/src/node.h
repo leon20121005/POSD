@@ -22,6 +22,11 @@ class Node
             return _nodeName;
         }
 
+        int size() const
+        {
+            return _st.st_size;
+        }
+
         virtual void add(Node* node)
         {
             throw std::string("unable to add");
