@@ -1,4 +1,5 @@
 #include "node.h"
+#include "null_iterator.h"
 
 class File: public Node
 {
@@ -10,5 +11,10 @@ class File: public Node
         void accept(NodeVisitor* nodeVisitor)
         {
             nodeVisitor->visitFile(this);
+        }
+
+        NodeIterator* createIterator()
+        {
+            return new NullIterator();
         }
 };

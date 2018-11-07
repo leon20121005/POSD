@@ -1,6 +1,7 @@
 #include "find_visitor.h"
 #include "file.h"
 #include "folder.h"
+#include "node_iterator.h"
 
 FindVisitor::FindVisitor(std::string target):_target(target)
 {
@@ -20,6 +21,8 @@ void FindVisitor::visitFile(File* file)
 
 void FindVisitor::visitFolder(Folder* folder)
 {
+    NodeIterator* nodeIterator = folder->createIterator();
+
     if (_traversal == "")
     {
         _traversal += ".";
@@ -34,9 +37,9 @@ void FindVisitor::visitFolder(Folder* folder)
         _traversal += "/<branch>";
     }
 
-    for (std::map<std::string, Node*>::iterator iter = folder->_children.begin(); iter != folder->_children.end(); iter++)
+    for (nodeIterator->first(); !nodeIterator->isDone(); nodeIterator->next())
     {
-        iter->second->accept(this);
+        nodeIterator->currentItem()->accept(this);
     }
 }
 

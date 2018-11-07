@@ -1,6 +1,6 @@
 .PHONY: clean
 
-bin/hw5: test/ut_fs.cpp test/ut_fs.h src/file.h src/folder.h src/node.h src/node_visitor.h obj/find_visitor.o
+bin/hw5: test/ut_fs.cpp test/ut_fs.h src/file.h src/folder.h src/node.h src/node_visitor.h obj/find_visitor.o src/node_iterator.h src/null_iterator.h
 ifeq ($(OS), Windows_NT)
 	g++ obj/find_visitor.o $< -o $@ -lgtest
 else
