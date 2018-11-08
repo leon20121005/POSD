@@ -10,6 +10,12 @@ class File: public Node
 
         void accept(NodeVisitor* nodeVisitor)
         {
+            nodeVisitor->clearResult();
+            nodeVisitor->visitFile(this);
+        }
+
+        void acceptChild(NodeVisitor* nodeVisitor)
+        {
             nodeVisitor->visitFile(this);
         }
 

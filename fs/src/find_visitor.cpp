@@ -39,7 +39,7 @@ void FindVisitor::visitFolder(Folder* folder)
 
     for (nodeIterator->first(); !nodeIterator->isDone(); nodeIterator->next())
     {
-        nodeIterator->currentItem()->accept(this);
+        nodeIterator->currentItem()->acceptChild(this);
     }
 }
 
@@ -92,4 +92,9 @@ void FindVisitor::assembleResult(std::vector<std::string> tempResult)
     {
         _result += "\n" + singleResult;
     }
+}
+
+void FindVisitor::clearResult()
+{
+    _traversal = "";
 }

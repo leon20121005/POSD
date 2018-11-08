@@ -8,6 +8,7 @@ class FindVisitor: public NodeVisitor
         void visitFile(File* file);
         void visitFolder(Folder* folder);
         std::string findResult();
+        void clearResult();
     private:
         void assembleResult(std::vector<std::string> tempResult);
         std::string _target;

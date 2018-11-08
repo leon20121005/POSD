@@ -21,6 +21,16 @@ void InfoContentVisitor::visitFolder(Folder* folder)
     }
 }
 
+std::string InfoContentVisitor::findResult()
+{
+    return "";
+}
+
+void InfoContentVisitor::clearResult()
+{
+    _size = 0;
+}
+
 int InfoContentVisitor::getContentSize()
 {
     return _size;

@@ -12,6 +12,7 @@ class NodeVisitor
         virtual void visitFile(File* file) = 0;
         virtual void visitFolder(Folder* folder) = 0;
         virtual std::string findResult() = 0;
+        virtual void clearResult() = 0;
 };
 
 #endif

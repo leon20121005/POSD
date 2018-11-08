@@ -58,6 +58,12 @@ class Folder: public Node
 
         void accept(NodeVisitor* nodeVisitor)
         {
+            nodeVisitor->clearResult();
+            nodeVisitor->visitFolder(this);
+        }
+
+        void acceptChild(NodeVisitor* nodeVisitor)
+        {
             nodeVisitor->visitFolder(this);
         }
 
