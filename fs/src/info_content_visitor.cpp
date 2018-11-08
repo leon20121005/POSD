@@ -17,7 +17,7 @@ void InfoContentVisitor::visitFolder(Folder* folder)
     NodeIterator* nodeIterator = folder->createIterator();
     for (nodeIterator->first(); !nodeIterator->isDone(); nodeIterator->next())
     {
-        nodeIterator->currentItem()->accept(this);
+        nodeIterator->currentItem()->acceptChild(this);
     }
 }
 

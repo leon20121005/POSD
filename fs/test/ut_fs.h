@@ -4,6 +4,7 @@
 #include "../src/file.h"
 #include "../src/folder.h"
 #include "../src/find_visitor.h"
+#include "../src/info_content_visitor.h"
 
 using namespace std;
 
@@ -106,4 +107,16 @@ TEST(FileSystemTest, FindFileInComplicatedPath)
     folder->accept(findVisitor2);
     ASSERT_EQ("./folder/hello.cpp", findVisitor->findResult());
     ASSERT_EQ("./hello.cpp", findVisitor2->findResult());
+}
+
+TEST(FileSystemTest, FindVisitorReuse)
+{
+    Node* test_data = new Folder("./test_data");
+    Node* hello_out = new File("./test_data/hello.out");
+    test_data->add(hello_out);
+    NodeVisitor* findVisitor = new FindVisitor("hello.out");
+    test_data->accept(findVisitor);
+    ASSERT_EQ("./hello.out", findVisitor->findResult());
+    hello_out->accept(findVisitor);
+    ASSERT_EQ("hello.out", findVisitor->findResult());
 }

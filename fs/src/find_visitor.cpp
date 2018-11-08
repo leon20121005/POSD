@@ -97,4 +97,5 @@ void FindVisitor::assembleResult(std::vector<std::string> tempResult)
 void FindVisitor::clearResult()
 {
     _traversal = "";
+    _result = "";
 }
