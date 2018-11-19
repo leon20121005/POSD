@@ -35,3 +35,8 @@ void FindLinkVisitor::clearResult()
 {
     _links.clear();
 }
+
+std::string FindLinkVisitor::findResult()
+{
+    return "";
+}

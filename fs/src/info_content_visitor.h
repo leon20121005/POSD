@@ -9,9 +9,9 @@ class InfoContentVisitor: public NodeVisitor
         void visitLink(Link* link)
         {
         }
-        std::string findResult();
-        void clearResult();
         int getContentSize();
+        void clearResult();
+        std::string findResult();
     private:
         int _size;
 };

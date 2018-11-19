@@ -11,6 +11,7 @@ class FindLinkVisitor: public NodeVisitor
         void visitLink(Link* link);
         std::vector<Node*> getLinks();
         void clearResult();
+        std::string findResult();
     private:
         std::vector<Node*> _links;
 };
