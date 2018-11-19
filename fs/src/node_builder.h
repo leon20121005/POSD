@@ -39,7 +39,8 @@ class NodeBuilder
                         if (std::string(entry->d_name) != "." && std::string(entry->d_name) != "..")
                         {
                             NodeBuilder nb;
-                            const char* pathName = (std::string(path) + "/" + entry->d_name).c_str();
+                            std::string temp = std::string(path) + "/" + entry->d_name;
+                            const char* pathName = temp.c_str();
                             nb.build(pathName);
                             _root->add(nb.getRoot());
                         }
