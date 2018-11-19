@@ -44,6 +44,11 @@ class Folder: public Node
 
         Folder(const char* path):Node(path)
         {
+            struct stat st;
+            if (lstat(path, &st) == 0 && !S_ISDIR(st.st_mode))
+            {
+                throw std::string("Do no indicate the file path.");
+            }
         }
 
         void add(Node* node)
