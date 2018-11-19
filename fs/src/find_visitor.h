@@ -7,6 +7,9 @@ class FindVisitor: public NodeVisitor
         FindVisitor(std::string target);
         void visitFile(File* file);
         void visitFolder(Folder* folder);
+        void visitLink(Link* link)
+        {
+        }
         std::string findResult();
         void clearResult();
     private:

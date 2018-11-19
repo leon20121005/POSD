@@ -40,7 +40,11 @@ class Node
 
         virtual void accept(NodeVisitor* nodeVisitor) = 0;
         virtual void acceptChild(NodeVisitor* nodeVisitor) = 0;
-        virtual NodeIterator* createIterator() = 0;
+
+        virtual NodeIterator* createIterator()
+        {
+            return nullptr;
+        }
 
         static std::vector<std::string> split(std::string s, std::string delimiter)
         {

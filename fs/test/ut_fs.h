@@ -3,8 +3,10 @@
 
 #include "../src/file.h"
 #include "../src/folder.h"
+#include "../src/link.h"
 #include "../src/find_visitor.h"
 #include "../src/info_content_visitor.h"
+#include "../src/node_builder.h"
 
 using namespace std;
 
@@ -119,4 +121,13 @@ TEST(FileSystemTest, FindVisitorReuse)
     ASSERT_EQ("./hello.out", findVisitor->findResult());
     hello_out->accept(findVisitor);
     ASSERT_EQ("hello.out", findVisitor->findResult());
+}
+
+TEST(FileSystemTest, NodeBuilder)
+{
+    NodeBuilder nodeBuilder;
+    nodeBuilder.build("test_data/hello.cpp");
+    ASSERT_EQ(92, nodeBuilder.getRoot()->size());
+    nodeBuilder.build("test_data/hello");
+    ASSERT_EQ(13, nodeBuilder.getRoot()->size());
 }
