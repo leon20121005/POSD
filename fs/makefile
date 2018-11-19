@@ -11,7 +11,7 @@ endif
 
 obj/find_visitor.o: src/find_visitor.cpp src/find_visitor.h
 ifeq ($(OS), Windows_NT)
-	g++ -c $< -o $@ -lgtest
+	g++ -std=c++11 -c $< -o $@ -lgtest
 else
 	g++ -std=c++11 -c $< -o $@ -lgtest -lpthread
 endif

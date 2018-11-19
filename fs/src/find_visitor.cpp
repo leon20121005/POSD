@@ -32,9 +32,14 @@ void FindVisitor::visitFolder(Folder* folder)
         _traversal += "/" + folder->name();
     }
 
+    if (folder->numberOfChildren() == 0)
+    {
+        _traversal += "/<leaf>";
+        return;
+    }
     if (folder->numberOfChildren() > 1)
     {
-        _traversal += "/<branch>";
+        _traversal += "/<branch>" + std::to_string(folder->numberOfChildren());
     }
 
     for (nodeIterator->first(); !nodeIterator->isDone(); nodeIterator->next())
@@ -45,28 +50,28 @@ void FindVisitor::visitFolder(Folder* folder)
 
 std::string FindVisitor::findResult()
 {
-    std::vector<std::string>* splitResult = Node::split(_traversal, "/");
-    for (int i = 0; i < splitResult->size(); i++)
+    std::vector<std::string> splitResult = Node::split(_traversal, "/");
+    for (int i = 0; i < splitResult.size(); i++)
     {
-        if ((*splitResult)[i] == _target)
+        if (splitResult[i] == _target)
         {
             int counter = 0;
             std::vector<std::string> tempResult;
             for (int j = i; j > -1; j--)
             {
-                if ((*splitResult)[j] == "<leaf>")
+                if (splitResult[j] == "<leaf>")
                 {
                     counter += 1;
                     continue;
                 }
-                if ((*splitResult)[j] == "<branch>")
+                if (splitResult[j].substr(0, 8) == "<branch>")
                 {
-                    counter -= 1;
+                    counter -= std::stoi(splitResult[j].substr(8, 1));
                     continue;
                 }
                 if (counter <= 0)
                 {
-                    tempResult.push_back((*splitResult)[j]);
+                    tempResult.push_back(splitResult[j]);
                 }
             }
             assembleResult(tempResult);

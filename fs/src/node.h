@@ -14,18 +14,18 @@ class Node
         Node(const char* path):_path(path)
         {
             lstat(_path, &_st);
-            std::vector<std::string>* splitResult = split(_path, "/");
-            _nodeName = (*splitResult)[splitResult->size() - 1];
-        }
-
-        std::string name()
-        {
-            return _nodeName;
+            std::vector<std::string> splitResult = split(_path, "/");
+            _nodeName = splitResult[splitResult.size() - 1];
         }
 
         int size() const
         {
             return _st.st_size;
+        }
+
+        std::string name()
+        {
+            return _nodeName;
         }
 
         virtual void add(Node* node)
@@ -42,12 +42,12 @@ class Node
         virtual void acceptChild(NodeVisitor* nodeVisitor) = 0;
         virtual NodeIterator* createIterator() = 0;
 
-        static std::vector<std::string>* split(std::string s, std::string delimiter)
+        static std::vector<std::string> split(std::string s, std::string delimiter)
         {
-            std::vector<std::string>* result = new std::vector<std::string>();
+            std::vector<std::string> result;
             for (int index = 0; index < s.size();)
             {
-                result->push_back(s.substr(index, s.find(delimiter, index) - index));
+                result.push_back(s.substr(index, s.find(delimiter, index) - index));
 
                 if (s.find(delimiter, index) == std::string::npos)
                 {
