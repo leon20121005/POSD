@@ -18,17 +18,17 @@ void FindNodeByPathnameVisitor::visitFile(File* file)
 
 void FindNodeByPathnameVisitor::visitFolder(Folder* folder)
 {
-    if (_isFirstNode)
-    {
-        _isFirstNode = false;
-    }
-    else
-    {
+    // if (_isFirstNode)
+    // {
+    //     _isFirstNode = false;
+    // }
+    // else
+    // {
         if (isPathMatched(folder))
         {
             _nodes.push_back(folder);
         }
-    }
+    // }
     NodeIterator* nodeIterator = folder->createIterator();
     for (nodeIterator->first(); !nodeIterator->isDone(); nodeIterator->next())
     {
@@ -38,10 +38,10 @@ void FindNodeByPathnameVisitor::visitFolder(Folder* folder)
 
 void FindNodeByPathnameVisitor::visitLink(Link* link)
 {
-    if (_isFirstNode)
-    {
-        _isFirstNode = false;
-    }
+    // if (_isFirstNode)
+    // {
+    //     _isFirstNode = false;
+    // }
     if (isPathMatched(link))
     {
         _nodes.push_back(link);
