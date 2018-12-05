@@ -50,6 +50,10 @@ void FindNodeByPathnameVisitor::visitLink(Link* link)
 
 bool FindNodeByPathnameVisitor::isPathMatched(Node* node)
 {
+    if (_pathnames->size() == 0)
+    {
+        return false;
+    }
     Node* tempNode = node;
     for (std::vector<std::string>::reverse_iterator iter = _pathnames->rbegin(); iter != _pathnames->rend(); iter++)
     {
