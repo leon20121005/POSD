@@ -38,6 +38,10 @@ void FindNodeByPathnameVisitor::visitFolder(Folder* folder)
 
 void FindNodeByPathnameVisitor::visitLink(Link* link)
 {
+    if (_isFirstNode)
+    {
+        _isFirstNode = false;
+    }
     if (isPathMatched(link))
     {
         _nodes.push_back(link);
