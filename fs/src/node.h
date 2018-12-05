@@ -46,6 +46,16 @@ class Node
             return nullptr;
         }
 
+        Node* getParent() const
+        {
+            return _parent;
+        }
+
+        void setParent(Node* parent)
+        {
+            _parent = parent;
+        }
+
         static std::vector<std::string> split(std::string s, std::string delimiter)
         {
             std::vector<std::string> result;
@@ -65,6 +75,7 @@ class Node
         const char* _path;
         struct stat _st;
         std::string _nodeName;
+        Node* _parent;
 };
 
 #endif

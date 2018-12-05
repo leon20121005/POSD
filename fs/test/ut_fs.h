@@ -6,6 +6,7 @@
 #include "../src/link.h"
 #include "../src/find_visitor.h"
 #include "../src/info_content_visitor.h"
+#include "../src/find_node_by_pathname_visitor.h"
 #include "../src/node_builder.h"
 
 using namespace std;
@@ -129,5 +130,34 @@ TEST(FileSystemTest, NodeBuilder)
     nodeBuilder.build("test_data/hello.cpp");
     ASSERT_EQ(92, nodeBuilder.getRoot()->size());
     nodeBuilder.build("test_data/hello");
-    ASSERT_EQ(13, nodeBuilder.getRoot()->size());
+    ASSERT_EQ(14, nodeBuilder.getRoot()->size());
+}
+
+TEST(FindNodeByPathnameVisitor, Link)
+{
+    Node* hello = new Link("./test_data/hello");
+    vector<string>* names = new vector<string>{std::string("hello")};
+    FindNodeByPathnameVisitor* visitor = new FindNodeByPathnameVisitor(names);
+    hello->accept(visitor);
+    ASSERT_EQ(hello, visitor->getNode());
+}
+
+TEST(FindNodeByPathnameVisitor, LinkInFolder)
+{
+    Node* test_data = new Folder ("./test_data");
+    Node* hello = new Link("./test_data/hello");
+    test_data->add(hello);
+    vector<string>* names = new vector<string>{string("test_data"), string("hello")};
+    FindNodeByPathnameVisitor* visitor = new FindNodeByPathnameVisitor(names);
+    test_data->accept(visitor);
+    ASSERT_EQ(hello, visitor->getNode());
+}
+
+TEST(FindNodeByPathnameVisitor, NonExistingFileInFileSystem)
+{
+    Node* test_data = new Folder("./test_data");
+    vector<string>* names = new vector<string>{string("test_data"), string("helloWorld")};
+    FindNodeByPathnameVisitor* visitor = new FindNodeByPathnameVisitor(names);
+    test_data->accept(visitor);
+    ASSERT_EQ(nullptr, visitor->getNode());
 }

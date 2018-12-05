@@ -54,6 +54,7 @@ class Folder: public Node
         void add(Node* node)
         {
             _children.insert(std::pair<std::string, Node*>(node->name(), node));
+            node->setParent(this);
         }
 
         int numberOfChildren()

@@ -1,6 +1,7 @@
 #include "find_visitor.h"
 #include "file.h"
 #include "folder.h"
+#include "link.h"
 #include "node_iterator.h"
 
 FindVisitor::FindVisitor(std::string target):_target(target)
@@ -46,6 +47,10 @@ void FindVisitor::visitFolder(Folder* folder)
     {
         nodeIterator->currentItem()->acceptChild(this);
     }
+}
+
+void FindVisitor::visitLink(Link* link)
+{
 }
 
 std::string FindVisitor::findResult()
