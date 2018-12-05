@@ -3,7 +3,6 @@
 #include "folder.h"
 #include "link.h"
 #include "node_iterator.h"
-#include <iostream>
 
 FindNodeByPathnameVisitor::FindNodeByPathnameVisitor(std::vector<std::string>* pathnames):_pathnames(pathnames)
 {
@@ -11,12 +10,9 @@ FindNodeByPathnameVisitor::FindNodeByPathnameVisitor(std::vector<std::string>* p
 
 void FindNodeByPathnameVisitor::visitFile(File* file)
 {
-    for (std::vector<std::string>::iterator iter = _pathnames->begin(); iter != _pathnames->end(); iter++)
+    if (isPathMatched(file))
     {
-        if (file->name() == *iter)
-        {
-            _nodes.push_back(file);
-        }
+        _nodes.push_back(file);
     }
 }
 
@@ -28,12 +24,9 @@ void FindNodeByPathnameVisitor::visitFolder(Folder* folder)
     }
     else
     {
-        for (std::vector<std::string>::iterator iter = _pathnames->begin(); iter != _pathnames->end(); iter++)
+        if (isPathMatched(folder))
         {
-            if (folder->name() == *iter)
-            {
-                _nodes.push_back(folder);
-            }
+            _nodes.push_back(folder);
         }
     }
     NodeIterator* nodeIterator = folder->createIterator();
@@ -45,17 +38,31 @@ void FindNodeByPathnameVisitor::visitFolder(Folder* folder)
 
 void FindNodeByPathnameVisitor::visitLink(Link* link)
 {
-    for (std::vector<std::string>::iterator iter = _pathnames->begin(); iter != _pathnames->end(); iter++)
+    if (isPathMatched(link))
     {
-        if (link->name() == *iter)
-        {
-            _nodes.push_back(link);
-        }
+        _nodes.push_back(link);
     }
     if (link->getSource() != nullptr)
     {
         link->getSource()->acceptChild(this);
     }
+}
+
+bool FindNodeByPathnameVisitor::isPathMatched(Node* node)
+{
+    Node* tempNode = node;
+    for (std::vector<std::string>::reverse_iterator iter = _pathnames->rbegin(); iter != _pathnames->rend(); iter++)
+    {
+        if (tempNode == nullptr || tempNode->name() != *iter)
+        {
+            return false;
+        }
+        else
+        {
+            tempNode = tempNode->getParent();
+        }
+    }
+    return true;
 }
 
 // return the Node object if the path indicate the node in the file system, and if not, return nullptr.

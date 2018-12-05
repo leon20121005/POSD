@@ -9,7 +9,6 @@ class NodeIterator
         virtual ~NodeIterator()
         {
         }
-
         virtual void first() = 0;
         virtual Node* currentItem() = 0;
         virtual void next() = 0;

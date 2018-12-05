@@ -1,6 +1,7 @@
 #include "info_content_visitor.h"
 #include "file.h"
 #include "folder.h"
+#include "link.h"
 #include "node_iterator.h"
 
 InfoContentVisitor::InfoContentVisitor()
@@ -19,6 +20,10 @@ void InfoContentVisitor::visitFolder(Folder* folder)
     {
         nodeIterator->currentItem()->acceptChild(this);
     }
+}
+
+void InfoContentVisitor::visitLink(Link* link)
+{
 }
 
 int InfoContentVisitor::getContentSize()

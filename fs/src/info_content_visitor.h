@@ -6,9 +6,7 @@ class InfoContentVisitor: public NodeVisitor
         InfoContentVisitor();
         void visitFile(File* file);
         void visitFolder(Folder* folder);
-        void visitLink(Link* link)
-        {
-        }
+        void visitLink(Link* link);
         int getContentSize();
         void clearResult();
         std::string findResult();

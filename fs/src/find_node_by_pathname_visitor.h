@@ -13,6 +13,7 @@ class FindNodeByPathnameVisitor: public NodeVisitor
         void clearResult();
         std::string findResult();
     private:
+        bool isPathMatched(Node* node);
         std::vector<std::string>* _pathnames;
         std::vector<Node*> _nodes;
         bool _isFirstNode;
