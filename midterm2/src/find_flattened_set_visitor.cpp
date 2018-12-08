@@ -7,18 +7,20 @@
 
 FindFlattenedSetVisitor::FindFlattenedSetVisitor()
 {
+    _result = new Set();
 }
 
 void FindFlattenedSetVisitor::visitInteger(Integer* integer)
 {
-    if (_result == "")
-    {
-        _result += integer->toString();
-    }
-    else
-    {
-        _result += "," + integer->toString();
-    }
+    // if (_result == "")
+    // {
+    //     _result += integer->toString();
+    // }
+    // else
+    // {
+    //     _result += "," + integer->toString();
+    // }
+    _result->add(integer);
 }
 
 void FindFlattenedSetVisitor::visitSet(Set* set)
@@ -30,7 +32,12 @@ void FindFlattenedSetVisitor::visitSet(Set* set)
     }
 }
 
-std::string FindFlattenedSetVisitor::getResult()
+// std::string FindFlattenedSetVisitor::getResult()
+// {
+//     return _result;
+// }
+
+Set* FindFlattenedSetVisitor::getResult()
 {
     return _result;
 }

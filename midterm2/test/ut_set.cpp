@@ -49,5 +49,6 @@ TEST(SetTest, createFlattenedSet)
 
     FindFlattenedSetVisitor* visitor = new FindFlattenedSetVisitor();
     set->accept(visitor);
-    ASSERT_EQ("1,2,3,4,5", visitor->getResult());
+    Set* flattenedSet = visitor->getResult();
+    ASSERT_EQ("{1,2,3,4,5}", flattenedSet->toString());
 }

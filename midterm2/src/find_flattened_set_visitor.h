@@ -12,9 +12,11 @@ class FindFlattenedSetVisitor
         FindFlattenedSetVisitor();
         void visitInteger(Integer* integer);
         void visitSet(Set* set);
-        std::string getResult();
+        // std::string getResult();
+        Set* getResult();
     private:
-        std::string _result;
+        // std::string _result;
+        Set* _result;
 };
 
 #endif
