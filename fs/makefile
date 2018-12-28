@@ -1,10 +1,13 @@
 .PHONY: clean
 
-all: clean dict obj/find_node_by_pathname_visitor.o obj/find_link_visitor.o obj/find_visitor.o obj/info_content_visitor.o bin/hw7
+all: clean dict bin/hw8
 
-bin/hw7: test/ut_fs.cpp test/ut_fs.h src/file.h src/folder.h src/link.h src/node.h src/node_visitor.h src/node_iterator.h src/null_iterator.h src/node_builder.h obj/find_visitor.o obj/find_link_visitor.o obj/find_node_by_pathname_visitor.o obj/info_content_visitor.o
+bin/hw8: src/tree_test.cpp src/tree_test.h src/tree_frame.h src/node_model.h src/subject.h src/observer.h src/node.h src/file.h src/folder.h src/link.h src/node_iterator.h src/null_iterator.h src/node_builder.h
+	g++ -std=c++11 $< `wx-config --libs` `wx-config --cxxflags` -o $@ -lpthread
+
+bin/hw7: test/ut_fs.cpp test/ut_fs.h src/node.h src/file.h src/folder.h src/link.h src/node_iterator.h src/null_iterator.h src/node_builder.h src/node_visitor.h obj/find_node_by_pathname_visitor.o obj/find_link_visitor.o obj/find_visitor.o obj/info_content_visitor.o
 ifeq ($(OS), Windows_NT)
-	g++ obj/find_node_by_pathname_visitor.o obj/find_link_visitor.o obj/find_visitor.o obj/info_content_visitor.o $< -o $@ -lgtest
+	g++ -std=c++11 obj/find_node_by_pathname_visitor.o obj/find_link_visitor.o obj/find_visitor.o obj/info_content_visitor.o $< -o $@ -lgtest
 else
 	g++ -std=c++11 obj/find_node_by_pathname_visitor.o obj/find_link_visitor.o obj/find_visitor.o obj/info_content_visitor.o $< -o $@ -lgtest -lpthread
 endif

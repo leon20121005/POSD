@@ -36,6 +36,11 @@ class Link: public Node
         {
             nodeVisitor->visitLink(this);
         }
+
+        NodeIterator* createIterator()
+        {
+            return new NullIterator();
+        }
     private:
         Node* _source;
 };
